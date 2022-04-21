@@ -1,0 +1,25 @@
+    data=[]
+    rate=[]
+    today=datetime.date.today()
+    
+    for i in range(len(lombard)):
+        data.append(lombard[i][0])
+        rate.append(lombard[i][1][:-1])
+    
+    
+    rows,cols=(len(wind111),len(lombard))
+    days=[[0 for i in range(cols)] for j in range(rows)]
+    odsetki=[0 for i in range(rows)]
+   
+    for i in range(len(wind111)):
+        date=datetime.datetime.strptime(wind111[i][2], '%Y-%m-%d').date() #pobranie daty zaciagniecia pozyczki
+        date1=today
+        for j in range(len(lombard)):
+            date2=datetime.datetime.strptime(data[j], '%Y-%m-%d').date() #pobranie wartosci zmiennej 
+            if(date2>date):
+                days[i][j]=((date1-date2).days)
+                date1=date2
+            else:
+                days[i][j]=(date1-date).days
+                break
+print(days)
